@@ -5,7 +5,7 @@ name = "go"
 enabled = true
 
   [analyzers.meta]
-  import_root = "github.com/go-rel/gin-example"
+  import_root = "github.com/iris-contrib/go-rel-iris-example"
 
 [[transformers]]
 name = "gofmt"

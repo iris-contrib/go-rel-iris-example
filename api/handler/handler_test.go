@@ -5,15 +5,16 @@ import (
 	"errors"
 	"net"
 	"net/http"
-	"net/http/httptest"
+	stdHTTPTest "net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
+	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/httptest"
 	"github.com/stretchr/testify/assert"
 )
 
 type responseRecorder struct {
-	*httptest.ResponseRecorder
+	*stdHTTPTest.ResponseRecorder
 }
 
 func (crr *responseRecorder) CloseNotify() <-chan bool {
@@ -74,12 +75,11 @@ func TestRender(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			var (
-				rr = httptest.NewRecorder()
-				c  = &gin.Context{Writer: &responseRecorder{rr}}
-			)
+			rr := httptest.NewRecorder()
+			httptest.Do(rr, nil, func(c iris.Context) {
+				render(c, test.data, 200)
+			})
 
-			render(c, test.data, 200)
 			if test.response != "" {
 				assert.JSONEq(t, test.response, rr.Body.String())
 			} else {

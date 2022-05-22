@@ -3,13 +3,9 @@ package todos
 import (
 	"context"
 
-	"github.com/go-rel/gin-example/scores"
-	"github.com/go-rel/rel"
-	"go.uber.org/zap"
-)
+	"github.com/iris-contrib/go-rel-iris-example/scores"
 
-var (
-	logger, _ = zap.NewProduction(zap.Fields(zap.String("type", "todos")))
+	"github.com/go-rel/rel"
 )
 
 //go:generate mockery --name=Service --case=underscore --output todostest --outpkg todostest

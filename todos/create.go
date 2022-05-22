@@ -3,9 +3,9 @@ package todos
 import (
 	"context"
 
-	"github.com/go-rel/gin-example/scores"
+	"github.com/iris-contrib/go-rel-iris-example/scores"
+
 	"github.com/go-rel/rel"
-	"go.uber.org/zap"
 )
 
 type create struct {
@@ -15,7 +15,6 @@ type create struct {
 
 func (c create) Create(ctx context.Context, todo *Todo) error {
 	if err := todo.Validate(); err != nil {
-		logger.Warn("validation error", zap.Error(err))
 		return err
 	}
 

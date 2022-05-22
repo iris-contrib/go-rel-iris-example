@@ -3,9 +3,9 @@ package todos
 import (
 	"context"
 
-	"github.com/go-rel/gin-example/scores"
+	"github.com/iris-contrib/go-rel-iris-example/scores"
+
 	"github.com/go-rel/rel"
-	"go.uber.org/zap"
 )
 
 type update struct {
@@ -15,7 +15,6 @@ type update struct {
 
 func (u update) Update(ctx context.Context, todo *Todo, changes rel.Changeset) error {
 	if err := todo.Validate(); err != nil {
-		logger.Warn("validation error", zap.Error(err))
 		return err
 	}
 

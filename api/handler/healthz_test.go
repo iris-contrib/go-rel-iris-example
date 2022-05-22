@@ -7,8 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
-	"github.com/go-rel/gin-example/api/handler"
+	"github.com/iris-contrib/go-rel-iris-example/api/handler"
+
+	"github.com/kataras/iris/v12"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -47,15 +48,18 @@ func TestHealthz_Show(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router  = gin.New()
+				router  = iris.New()
 				handler = handler.NewHealthz()
 				req, _  = http.NewRequest("GET", test.path, nil)
 				rr      = httptest.NewRecorder()
 			)
 
 			handler.Add("test", test.pinger)
+			handler.Mount(router.Party("/"))
 
-			handler.Mount(router.Group("/"))
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)

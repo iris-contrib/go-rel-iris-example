@@ -1,14 +1,12 @@
-# Gin + Rel Todo Backend Example
+# Iris + Rel Todo Backend Example
 
-[![GoDoc](https://godoc.org/github.com/go-rel/gin-example?status.svg)](https://godoc.org/github.com/go-rel/gin-example)
-[![Build Status](https://travis-ci.com/go-rel/gin-example.svg?branch=master)](https://travis-ci.com/go-rel/gin-example)
-[![Go Report Card](https://goreportcard.com/badge/github.com/go-rel/gin-example)](https://goreportcard.com/report/github.com/go-rel/gin-example)
-[![Maintainability](https://api.codeclimate.com/v1/badges/d506b5b2df687cbcd358/maintainability)](https://codeclimate.com/github/go-rel/gin-example/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/d506b5b2df687cbcd358/test_coverage)](https://codeclimate.com/github/go-rel/gin-example/test_coverage)
+[![GoDoc](https://godoc.org/github.com/iris-contrib/go-rel-iris-example?status.svg)](https://godoc.org/github.com/iris-contrib/go-rel-iris-example)
+[![Build Status](https://img.shields.io/github/workflow/status/iris-contrib/go-rel-iris-example)](https://github.com/iris-contrib/go-rel-iris-example/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/go-rel-iris-example)](https://goreportcard.com/report/github.com/iris-contrib/go-rel-iris-example)
 
 Go Todo Backend Example Using Modular Project Layout for Product Microservice. It's suitable as starting point for a medium to larger project.
 
-This example uses [Gin](https://github.com/gin-gonic/gin) for http router and [REL](https://github.com/go-rel/rel) for database access.
+This example uses [Iris](https://github.com/kataras/iris) for http router and [REL](https://github.com/go-rel/rel) for database access.
 
 Feature:
 

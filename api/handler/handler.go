@@ -3,33 +3,31 @@ package handler
 import (
 	"errors"
 
-	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
+	"github.com/kataras/iris/v12"
 )
 
-var (
-	logger, _ = zap.NewProduction(zap.Fields(zap.String("type", "handler")))
-	// ErrBadRequest error.
-	ErrBadRequest = errors.New("Bad Request")
-)
+// ErrBadRequest error.
+var ErrBadRequest = errors.New("Bad Request")
 
-func render(c *gin.Context, body interface{}, status int) {
+func render(c iris.Context, body interface{}, status int) {
+	c.StatusCode(status)
+
 	switch v := body.(type) {
 	case string:
-		c.JSON(status, struct {
+		c.JSON(struct {
 			Message string `json:"message"`
 		}{
 			Message: v,
 		})
 	case error:
-		c.JSON(status, struct {
+		c.JSON(struct {
 			Error string `json:"error"`
 		}{
 			Error: v.Error(),
 		})
 	case nil:
-		c.Status(status)
+		return
 	default:
-		c.JSON(status, body)
+		c.JSON(body)
 	}
 }

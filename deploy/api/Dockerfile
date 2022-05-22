@@ -1,9 +1,9 @@
 # Step 1:
-FROM golang:1.13.5-alpine3.11 AS builder
+FROM golang:1.18.2-alpine AS builder
 
 RUN apk update && apk add --no-cache git make
 
-WORKDIR $GOPATH/src/github.com/go-rel/gin-example
+WORKDIR $GOPATH/src/github.com/iris-contrib/go-rel-iris-example
 COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64\
@@ -11,7 +11,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64\
 
 # Step 2:
 # you can also use scratch here, but I prefer to use alpine because it comes with basic command such as curl useful for debugging.
-FROM alpine:3.11
+FROM alpine
 
 RUN apk update && apk add --no-cache curl ca-certificates
 RUN rm -rf /var/cache/apk/*

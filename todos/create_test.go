@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/go-rel/gin-example/scores/scorestest"
 	"github.com/go-rel/reltest"
+	"github.com/iris-contrib/go-rel-iris-example/scores/scorestest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

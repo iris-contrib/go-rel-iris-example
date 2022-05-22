@@ -1,24 +1,23 @@
 package api
 
 import (
-	"time"
+	"github.com/iris-contrib/go-rel-iris-example/api/handler"
+	"github.com/iris-contrib/go-rel-iris-example/scores"
+	"github.com/iris-contrib/go-rel-iris-example/todos"
 
-	"github.com/gin-contrib/cors"
-	"github.com/gin-contrib/requestid"
-	ginzap "github.com/gin-contrib/zap"
-	"github.com/gin-gonic/gin"
-	"github.com/go-rel/gin-example/api/handler"
-	"github.com/go-rel/gin-example/scores"
-	"github.com/go-rel/gin-example/todos"
 	"github.com/go-rel/rel"
-	"go.uber.org/zap"
+
+	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/middleware/accesslog"
+	"github.com/kataras/iris/v12/middleware/cors"
+	"github.com/kataras/iris/v12/middleware/recover"
+	"github.com/kataras/iris/v12/middleware/requestid"
 )
 
 // New api.
-func New(repository rel.Repository) *gin.Engine {
+func New(repository rel.Repository) *iris.Application {
 	var (
-		logger, _      = zap.NewProduction()
-		router         = gin.New()
+		router         = iris.New()
 		scores         = scores.New(repository)
 		todos          = todos.New(repository, scores)
 		healthzHandler = handler.NewHealthz()
@@ -28,14 +27,55 @@ func New(repository rel.Repository) *gin.Engine {
 
 	healthzHandler.Add("database", repository)
 
-	router.Use(ginzap.Ginzap(logger, time.RFC3339, true))
-	router.Use(ginzap.RecoveryWithZap(logger, true))
-	router.Use(requestid.New())
-	router.Use(cors.Default())
+	router.UseRouter(recover.New())
 
-	healthzHandler.Mount(router.Group("/healthz"))
-	todosHandler.Mount(router.Group("/todos"))
-	scoreHandler.Mount(router.Group("/score"))
+	router.Use(cors.New().Handler())
+	router.Use(withAccessLogger("requests.json"))
+	router.Use(requestid.New())
+
+	healthzHandler.Mount(router.Party("/healthz"))
+	todosHandler.Mount(router.Party("/todos"))
+	scoreHandler.Mount(router.Party("/score"))
+
+	if err := router.Build(); err != nil {
+		panic(err)
+	}
 
 	return router
+}
+
+func withAccessLogger(filename string) iris.Handler {
+	// Initialize a new request access log middleware,
+	// note that we use unbuffered data so we can have the results as fast as possible,
+	// this has its cost use it only on debug.
+	ac := accesslog.FileUnbuffered(filename)
+
+	// The default configuration:
+	ac.Delim = '|'
+	ac.TimeFormat = "2006-01-02 15:04:05"
+	ac.Async = false
+	ac.IP = true
+	ac.BytesReceivedBody = true
+	ac.BytesSentBody = true
+	ac.BytesReceived = false
+	ac.BytesSent = false
+	ac.BodyMinify = false
+	ac.RequestBody = true
+	ac.ResponseBody = false
+	ac.KeepMultiLineError = true
+	ac.PanicLog = accesslog.LogHandler
+
+	// Default line format if formatter is missing:
+	// Time|Latency|Code|Method|Path|IP|Path Params Query Fields|Bytes Received|Bytes Sent|Request|Response|
+	//
+	// Set Custom Formatter:
+	ac.SetFormatter(&accesslog.JSON{
+		Indent:    "  ",
+		HumanTime: true,
+	})
+
+	// ac.SetFormatter(&accesslog.CSV{})
+	// ac.SetFormatter(&accesslog.Template{Text: "{{.Code}}"})
+
+	return ac.Handler
 }

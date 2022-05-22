@@ -5,10 +5,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
-	"github.com/go-rel/gin-example/api/handler"
-	"github.com/go-rel/gin-example/scores"
+	"github.com/iris-contrib/go-rel-iris-example/api/handler"
+	"github.com/iris-contrib/go-rel-iris-example/scores"
+
 	"github.com/go-rel/reltest"
+	"github.com/kataras/iris/v12"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,7 +35,7 @@ func TestScore_Index(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				repository = reltest.New()
 				handler    = handler.NewScore(repository)
 				req, _     = http.NewRequest("GET", test.path, nil)
@@ -45,7 +46,11 @@ func TestScore_Index(t *testing.T) {
 				test.mockRepo(repository)
 			}
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
+
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)
@@ -78,7 +83,7 @@ func TestScore_Points(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				repository = reltest.New()
 				handler    = handler.NewScore(repository)
 				req, _     = http.NewRequest("GET", test.path, nil)
@@ -89,7 +94,11 @@ func TestScore_Points(t *testing.T) {
 				test.mockRepo(repository)
 			}
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
+
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)

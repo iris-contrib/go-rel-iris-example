@@ -3,8 +3,8 @@ package todostest
 import (
 	context "context"
 
-	todos "github.com/go-rel/gin-example/todos"
 	rel "github.com/go-rel/rel"
+	todos "github.com/iris-contrib/go-rel-iris-example/todos"
 	mock "github.com/stretchr/testify/mock"
 )
 

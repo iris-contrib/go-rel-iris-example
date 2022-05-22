@@ -10,7 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/go-rel/gin-example/api"
+	"github.com/iris-contrib/go-rel-iris-example/api"
+
 	"github.com/go-rel/mysql"
 	"github.com/go-rel/rel"
 	_ "github.com/go-sql-driver/mysql"
@@ -86,9 +87,7 @@ func initRepository() rel.Repository {
 }
 
 func gracefulShutdown(ctx context.Context, server *http.Server, shutdown chan struct{}) {
-	var (
-		sigint = make(chan os.Signal, 1)
-	)
+	sigint := make(chan os.Signal, 1)
 
 	signal.Notify(sigint, os.Interrupt, syscall.SIGTERM)
 	<-sigint

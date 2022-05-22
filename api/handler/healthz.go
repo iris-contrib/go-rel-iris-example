@@ -4,8 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
+	"github.com/kataras/iris/v12"
 )
 
 // Pinger interface.
@@ -24,7 +23,7 @@ type Healthz struct {
 }
 
 // Show handle GET /
-func (h Healthz) Show(c *gin.Context) {
+func (h Healthz) Show(c iris.Context) {
 	var (
 		wg     sync.WaitGroup
 		status = 200
@@ -40,8 +39,6 @@ func (h Healthz) Show(c *gin.Context) {
 
 			pings[i].Service = service
 			if err := pinger.Ping(c); err != nil {
-				logger.Error("ping error", zap.Error(err))
-
 				status = 503
 				pings[i].Status = err.Error()
 			} else {
@@ -61,8 +58,8 @@ func (h *Healthz) Add(name string, ping Pinger) {
 }
 
 // Mount handlers to router group.
-func (h *Healthz) Mount(router *gin.RouterGroup) {
-	router.GET("/", h.Show)
+func (h *Healthz) Mount(router iris.Party) {
+	router.Get("/", h.Show)
 }
 
 // NewHealthz handler.

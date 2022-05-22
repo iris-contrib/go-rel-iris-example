@@ -6,19 +6,18 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
-	"github.com/go-rel/gin-example/api/handler"
-	"github.com/go-rel/gin-example/todos"
-	"github.com/go-rel/gin-example/todos/todostest"
+	"github.com/iris-contrib/go-rel-iris-example/api/handler"
+	"github.com/iris-contrib/go-rel-iris-example/todos"
+	"github.com/iris-contrib/go-rel-iris-example/todos/todostest"
+
 	"github.com/go-rel/rel/where"
 	"github.com/go-rel/reltest"
+	"github.com/kataras/iris/v12"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestTodos_Index(t *testing.T) {
-	var (
-		trueb = true
-	)
+	trueb := true
 
 	tests := []struct {
 		name            string
@@ -54,7 +53,7 @@ func TestTodos_Index(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				req, _     = http.NewRequest("GET", test.path, nil)
 				rr         = httptest.NewRecorder()
 				repository = reltest.New()
@@ -64,7 +63,11 @@ func TestTodos_Index(t *testing.T) {
 
 			todostest.Mock(todos, test.mockTodosSearch)
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
+
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)
@@ -121,7 +124,7 @@ func TestTodos_Create(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				body       = strings.NewReader(test.payload)
 				req, _     = http.NewRequest("POST", test.path, body)
 				rr         = httptest.NewRecorder()
@@ -132,7 +135,11 @@ func TestTodos_Create(t *testing.T) {
 
 			todostest.Mock(todos, test.mockTodosCreate)
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
+
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)
@@ -185,7 +192,7 @@ func TestTodos_Show(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				req, _     = http.NewRequest("GET", test.path, nil)
 				rr         = httptest.NewRecorder()
 				repository = reltest.New()
@@ -197,8 +204,11 @@ func TestTodos_Show(t *testing.T) {
 				test.mockRepo(repository)
 			}
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
 
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			if test.isPanic {
 				assert.Panics(t, func() {
 					router.ServeHTTP(rr, req)
@@ -268,7 +278,7 @@ func TestTodos_Update(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				body       = strings.NewReader(test.payload)
 				req, _     = http.NewRequest("PATCH", test.path, body)
 				rr         = httptest.NewRecorder()
@@ -283,7 +293,11 @@ func TestTodos_Update(t *testing.T) {
 
 			todostest.Mock(todos, test.mockTodosUpdate)
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
+
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)
@@ -319,7 +333,7 @@ func TestTodos_Destroy(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				req, _     = http.NewRequest("DELETE", test.path, nil)
 				rr         = httptest.NewRecorder()
 				repository = reltest.New()
@@ -333,7 +347,11 @@ func TestTodos_Destroy(t *testing.T) {
 
 			todostest.Mock(todos, test.mockTodosDelete)
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
+
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)
@@ -365,7 +383,7 @@ func TestTodos_Clear(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			var (
-				router     = gin.New()
+				router     = iris.New()
 				req, _     = http.NewRequest("DELETE", test.path, nil)
 				rr         = httptest.NewRecorder()
 				repository = reltest.New()
@@ -375,7 +393,11 @@ func TestTodos_Clear(t *testing.T) {
 
 			todostest.Mock(todos, test.mockTodosClear)
 
-			handler.Mount(router.Group("/"))
+			handler.Mount(router.Party("/"))
+
+			if err := router.Build(); err != nil {
+				t.Fatal(err)
+			}
 			router.ServeHTTP(rr, req)
 
 			assert.Equal(t, test.status, rr.Code)
