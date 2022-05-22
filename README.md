@@ -1,7 +1,7 @@
 # Iris + Rel Todo Backend Example
 
 [![GoDoc](https://godoc.org/github.com/iris-contrib/go-rel-iris-example?status.svg)](https://godoc.org/github.com/iris-contrib/go-rel-iris-example)
-[![Build Status](https://img.shields.io/github/workflow/status/iris-contrib/go-rel-iris-example)](https://github.com/iris-contrib/go-rel-iris-example/actions)
+[![Go](https://github.com/iris-contrib/go-rel-iris-example/actions/workflows/go.yml/badge.svg)](https://github.com/iris-contrib/go-rel-iris-example/actions/workflows/go.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/go-rel-iris-example)](https://goreportcard.com/report/github.com/iris-contrib/go-rel-iris-example)
 
 Go Todo Backend Example Using Modular Project Layout for Product Microservice. It's suitable as starting point for a medium to larger project.
