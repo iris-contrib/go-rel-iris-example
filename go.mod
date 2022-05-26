@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/go-rel/mysql v0.7.0
-	github.com/go-rel/rel v0.34.0
+	github.com/go-rel/rel v0.34.1
 	github.com/go-rel/reltest v0.9.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/kataras/iris/v12 v12.2.0-beta2
@@ -78,6 +78,6 @@ require (
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.0 // indirect
 	moul.io/http2curl v1.0.0 // indirect
 )
