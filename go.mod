@@ -3,12 +3,12 @@ module github.com/iris-contrib/go-rel-iris-example
 go 1.18
 
 require (
-	github.com/go-rel/mysql v0.7.0
-	github.com/go-rel/rel v0.34.0
+	github.com/go-rel/mysql v0.9.0
+	github.com/go-rel/rel v0.38.0
 	github.com/go-rel/reltest v0.9.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/kataras/iris/v12 v12.2.0-beta2
-	github.com/stretchr/testify v1.7.1
+	github.com/stretchr/testify v1.8.0
 	go.uber.org/zap v1.21.0
 )
 
@@ -24,7 +24,7 @@ require (
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/flosch/pongo2/v4 v4.0.2 // indirect
-	github.com/go-rel/sql v0.9.1 // indirect
+	github.com/go-rel/sql v0.12.0 // indirect
 	github.com/goccy/go-json v0.9.8-0.20220506185958-23bd66f4c0d5 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
@@ -56,7 +56,7 @@ require (
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
-	github.com/stretchr/objx v0.3.0 // indirect
+	github.com/stretchr/objx v0.4.0 // indirect
 	github.com/tdewolff/minify/v2 v2.11.2 // indirect
 	github.com/tdewolff/parse/v2 v2.5.29 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -78,6 +78,6 @@ require (
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 	moul.io/http2curl v1.0.0 // indirect
 )
