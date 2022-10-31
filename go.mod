@@ -3,12 +3,12 @@ module github.com/iris-contrib/go-rel-iris-example
 go 1.18
 
 require (
-	github.com/go-rel/mysql v0.7.0
-	github.com/go-rel/rel v0.34.0
+	github.com/go-rel/mysql v0.9.1
+	github.com/go-rel/rel v0.39.0
 	github.com/go-rel/reltest v0.9.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/kataras/iris/v12 v12.2.0-beta2
-	github.com/stretchr/testify v1.7.1
+	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.21.0
 )
 
@@ -24,7 +24,7 @@ require (
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/flosch/pongo2/v4 v4.0.2 // indirect
-	github.com/go-rel/sql v0.9.1 // indirect
+	github.com/go-rel/sql v0.13.0 // indirect
 	github.com/goccy/go-json v0.9.8-0.20220506185958-23bd66f4c0d5 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
@@ -49,14 +49,13 @@ require (
 	github.com/microcosm-cc/bluemonday v1.0.18 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/schollz/closestmatch v2.1.0+incompatible // indirect
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
-	github.com/stretchr/objx v0.3.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/tdewolff/minify/v2 v2.11.2 // indirect
 	github.com/tdewolff/parse/v2 v2.5.29 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -72,12 +71,12 @@ require (
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	golang.org/x/crypto v0.0.0-20220507011949-2cf3adece122 // indirect
-	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
-	golang.org/x/sys v0.0.0-20220503163025-988cb79eb6c6 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/net v0.1.0 // indirect
+	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 	moul.io/http2curl v1.0.0 // indirect
 )
